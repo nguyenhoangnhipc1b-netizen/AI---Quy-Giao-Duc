@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Phân tích quỹ giáo dục con miễn phí – biết ngay bạn cần bao nhiêu tiền để con vào đại học." />
+  <title>AI Quỹ Giáo Dục Con | Gia Đình Thịnh Vượng</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 · LANDING
+═══════════════════════════════════════ -->
+<section id="screen-landing" class="screen active">
+  <div class="landing-wrap">
+    <div class="brand-badge">Gia Đình Thịnh Vượng · AI Phân Tích</div>
+
+    <h1 class="landing-headline">
+      Bạn cần bao nhiêu tiền<br>để con vào đại học<br>
+      <span class="headline-year">năm 2045?</span>
+    </h1>
+
+    <p class="landing-sub">
+      Chỉ 3 phút · 8 câu hỏi · Báo cáo cá nhân hoá miễn phí.<br>
+      Dựa trên dữ liệu học phí thực tế tại Việt Nam & quốc tế.
+    </p>
+
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-num">12,400+</span><span class="trust-label">gia đình đã phân tích</span></div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><span class="trust-num">94%</span><span class="trust-label">hài lòng với báo cáo</span></div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><span class="trust-num">Miễn phí</span><span class="trust-label">hoàn toàn</span></div>
+    </div>
+
+    <button class="btn-primary" onclick="App.goToQuiz()">
+      Bắt đầu phân tích miễn phí
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+
+    <p class="landing-note">Không yêu cầu tạo tài khoản · Không spam</p>
+
+    <div class="landing-visual" aria-hidden="true">
+      <div class="visual-ring ring-1"></div>
+      <div class="visual-ring ring-2"></div>
+      <div class="visual-ring ring-3"></div>
+      <div class="visual-icon">🎓</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 · QUIZ
+═══════════════════════════════════════ -->
+<section id="screen-quiz" class="screen">
+  <div class="quiz-shell">
+    <!-- Header -->
+    <header class="quiz-header">
+      <button class="btn-back" onclick="App.quizBack()" aria-label="Quay lại">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <span class="progress-label" id="progress-label">1 / 8</span>
+      </div>
+    </header>
+
+    <!-- Question container -->
+    <div class="question-wrap" id="question-wrap"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 · REPORT PREVIEW
+═══════════════════════════════════════ -->
+<section id="screen-report" class="screen">
+  <div class="report-shell">
+    <div class="report-badge">Phân tích của bạn</div>
+
+    <h2 class="report-title">Kết quả sơ bộ</h2>
+
+    <!-- Score -->
+    <div class="score-ring-wrap">
+      <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring-track" cx="60" cy="60" r="52" />
+        <circle class="ring-progress" id="ring-progress" cx="60" cy="60" r="52"
+          stroke-dasharray="326.73"
+          stroke-dashoffset="326.73" />
+      </svg>
+      <div class="score-inner">
+        <span class="score-number" id="score-number">0</span>
+        <span class="score-label">điểm</span>
+      </div>
+    </div>
+
+    <p class="score-desc" id="score-desc"></p>
+
+    <!-- Gap card -->
+    <div class="gap-card">
+      <div class="gap-row">
+        <div class="gap-col">
+          <span class="gap-meta">Mục tiêu cần có</span>
+          <span class="gap-value" id="gap-target">–</span>
+        </div>
+        <div class="gap-col">
+          <span class="gap-meta">Quỹ hiện tại</span>
+          <span class="gap-value" id="gap-current">–</span>
+        </div>
+      </div>
+      <div class="gap-divider"></div>
+      <div class="gap-shortage">
+        <span class="gap-meta">Khoảng thiếu hụt ước tính</span>
+        <span class="gap-shortage-val" id="gap-shortage">–</span>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <p class="countdown-label">Thời gian còn lại để chuẩn bị</p>
+      <div class="countdown-boxes" id="countdown-boxes">
+        <div class="cbox"><span class="cnum" id="c-years">–</span><span class="clabel">năm</span></div>
+        <div class="csep">:</div>
+        <div class="cbox"><span class="cnum" id="c-months">–</span><span class="clabel">tháng</span></div>
+        <div class="csep">:</div>
+        <div class="cbox"><span class="cnum" id="c-days">–</span><span class="clabel">ngày</span></div>
+      </div>
+    </div>
+
+    <!-- Blur teaser -->
+    <div class="teaser-locked">
+      <div class="teaser-blur">
+        <div class="teaser-row"></div>
+        <div class="teaser-row short"></div>
+        <div class="teaser-row"></div>
+      </div>
+      <div class="teaser-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Mở khoá báo cáo đầy đủ</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="App.goToLead()">
+      Nhận báo cáo chi tiết miễn phí
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+
+    <p class="report-note">Chuyên gia sẽ liên hệ hỗ trợ miễn phí trong 24h</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 4 · LEAD FORM
+═══════════════════════════════════════ -->
+<section id="screen-lead" class="screen">
+  <div class="lead-shell">
+    <div class="lead-icon" aria-hidden="true">📋</div>
+    <h2 class="lead-title">Nhận báo cáo đầy đủ</h2>
+    <p class="lead-sub">Điền thông tin để nhận báo cáo cá nhân hoá và được tư vấn miễn phí bởi chuyên gia hoạch định tài chính.</p>
+
+    <div class="lead-form" id="lead-form">
+      <div class="field-group">
+        <label for="f-name">Họ và tên <span class="req">*</span></label>
+        <input type="text" id="f-name" placeholder="Nguyễn Văn A" autocomplete="name" />
+        <span class="field-err" id="err-name"></span>
+      </div>
+      <div class="field-group">
+        <label for="f-phone">Số điện thoại <span class="req">*</span></label>
+        <input type="tel" id="f-phone" placeholder="0912 345 678" autocomplete="tel" inputmode="tel" />
+        <span class="field-err" id="err-phone"></span>
+      </div>
+      <div class="field-group">
+        <label for="f-email">Email <span class="req">*</span></label>
+        <input type="email" id="f-email" placeholder="email@gmail.com" autocomplete="email" inputmode="email" />
+        <span class="field-err" id="err-email"></span>
+      </div>
+
+      <p class="consent">Thông tin của bạn được bảo mật tuyệt đối và chỉ dùng để liên hệ tư vấn.</p>
+
+      <button class="btn-primary" id="btn-submit" onclick="App.submitLead()">
+        <span id="btn-submit-text">Nhận báo cáo ngay</span>
+        <span id="btn-submit-spin" class="spinner hidden"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 5 · THANK YOU
+═══════════════════════════════════════ -->
+<section id="screen-thankyou" class="screen">
+  <div class="ty-shell">
+    <div class="ty-checkmark" aria-hidden="true">
+      <svg viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="38" stroke="#C9A84C" stroke-width="3"/>
+        <polyline points="22,42 35,55 58,28" stroke="#C9A84C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h2 class="ty-title">Cảm ơn bạn!</h2>
+    <p class="ty-sub">Báo cáo quỹ giáo dục cá nhân hoá đang được chuẩn bị.</p>
+
+    <div class="ty-card">
+      <div class="ty-step">
+        <span class="ty-step-num">1</span>
+        <div>
+          <strong>Trong vòng 24 giờ</strong>
+          <p>Chuyên gia hoạch định tài chính sẽ liên hệ qua số điện thoại của bạn.</p>
+        </div>
+      </div>
+      <div class="ty-step">
+        <span class="ty-step-num">2</span>
+        <div>
+          <strong>Tư vấn miễn phí 30 phút</strong>
+          <p>Xem xét báo cáo và xây dựng lộ trình giáo dục phù hợp gia đình bạn.</p>
+        </div>
+      </div>
+      <div class="ty-step">
+        <span class="ty-step-num">3</span>
+        <div>
+          <strong>Nhận kế hoạch hành động</strong>
+          <p>Lộ trình tích lũy cụ thể từng tháng, không áp lực, không ràng buộc.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="ty-footer">Gia Đình Thịnh Vượng · <a href="mailto:support@giadinhthinhvuong.vn">support@giadinhthinhvuong.vn</a></p>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
